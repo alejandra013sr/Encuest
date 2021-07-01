@@ -1,22 +1,28 @@
 from django.core.exceptions import AppRegistryNotReady
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 
 from rest_framework import status
-from profile_api import serializers
+from profile_api.serializers import UserSerializer
 # Create your views here.
 
 class HelloApiView(APIView):
     """Api View de prueba """
 
-    serializer_class = serializers.HelloSerializer
+    serializer_class = UserSerializer
 
     def get(self,request, format=None):
-        """ Retornar lista de características """
-        an_apiview=['Usamos metodos http como funciones','Otro elemento de la lista']
+        username = request.GET.get('username')
 
+        try:
+            user_token = Token.objects.get(
+                user= UserSerializer().Meta.model.objects.filter(username=username).first()
+            )
 
-        return Response({'message':'Hello world','an_api':an_apiview})
+            return Response({'token': user_token.key})
+        except:
+            return Response({'error':'Credenciales enviadas incorrectas'}, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self,request):
         """ Crea un mensaje con nuestro  nombre """

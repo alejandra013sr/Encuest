@@ -1,8 +1,11 @@
 from rest_framework import serializers
+from profile_api.models import UserProfile
 
-class HelloSerializer(serializers.Serializer):
+class UserSerializer(serializers.Serializer):
     """ Serializa un campo para probar nuestro APIView"""
 
-    name = serializers.CharField(max_length=10)
+    class Meta:
+        model = UserProfile
+        fields = ('username','last_name','email')
 
     
