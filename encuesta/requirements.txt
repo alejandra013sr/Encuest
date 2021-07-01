@@ -1,7 +1,6 @@
 asgiref==3.2.7
 gunicorn==20.0.4
 pytz==2020.1
-psycopg2==2.7,<3.0 --no-binary psycopg2
 sqlparse==0.3.1
 
 # Debugging
@@ -13,6 +12,7 @@ django_extensions==2.2.9
 django-environ==0.4.5
 django-heroku==0.3.1
 djangorestframework==3.11.0
+psycopg2-binary==2.9.1
 
 # Testing
 pytest==5.2.0
