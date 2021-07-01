@@ -20,6 +20,6 @@ RUN mkdir /geomelt_app
 WORKDIR /geomelt_app
 
 COPY requirements.txt /geomelt_app/
-RUN pip install -r requirement.txt
+RUN pip install -r requirements.txt
 
 COPY . /geomelt_app/
