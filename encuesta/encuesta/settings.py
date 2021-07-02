@@ -29,9 +29,9 @@ SECRET_KEY = 'django-insecure-m)3ikrupi#=te-f@7-e15^lr(e_iy!gz(w%6*+-eb5r+ac%)p)
 #SECRET_KEY = os.environ.get('GEOMELT_KEY', env('GEOMELT_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -86,12 +86,8 @@ WSGI_APPLICATION = 'encuesta.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-      ##'NAME': 'encuesta',
-      ##'USER': 'postgres',
-      ##'PASSWORD': 'alejandra02',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3"))
     }
 }
 
@@ -133,6 +129,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/code/static/'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
