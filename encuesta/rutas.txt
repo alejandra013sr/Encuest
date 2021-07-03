@@ -1,0 +1,1 @@
+-Ruta para la creación de usuario (método post): profile/users/

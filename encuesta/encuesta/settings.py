@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-m)3ikrupi#=te-f@7-e15^lr(e_iy!gz(w%6*+-eb5r+ac%)p)
 #SECRET_KEY = os.environ.get('GEOMELT_KEY', env('GEOMELT_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 

@@ -14,7 +14,7 @@ class UserProfileManager(BaseUserManager):
         user = self.model(email=email, name=name) #creamos el modelo de usuario
         user.set_password(password) #Le creamos un password
         user.save(using=self._db) #guardamos
-
+        
         return user
 
     def create_superuser(self, email, name, password):
@@ -28,13 +28,13 @@ class UserProfileManager(BaseUserManager):
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """ Modelo de base de datos para usuarios en el sistema """
-    email = models.EmailField(max_length=255, unique = True)
-    name= models.CharField(max_length=255)
+    email = models.EmailField(max_length=255, unique = True, null=True)
+    name= models.CharField(max_length=255, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
+    
     objects = UserProfileManager()
-
+  
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 
@@ -45,6 +45,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
         return f"Nombre corto: {self.name}"
 
     def __str__(self):
+        if self.get_full_name == None:
+            return "Error en el nombre"
         return self.get_full_name()
 
 
