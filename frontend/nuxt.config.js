@@ -1,4 +1,8 @@
 export default {
+  server: {
+    port: 8000, // por defecto: 3000
+    host: '0.0.0.0'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'encuesta',
@@ -15,6 +19,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~assets/scss/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
