@@ -6,7 +6,9 @@
 @import 'vendors/normalize';
 // @import 'vendors/jquery-ui';
 
-// @import 'base/reset';
+@import 'base/reset';
+@import 'base/gradients';
+@import 'base/fonts';
 // @import 'base/typography';
 
 // @import 'layout/navigation';
@@ -21,7 +23,7 @@
 // @import 'components/cover';
 // @import 'components/dropdown';
 
-// @import 'pages/home';
+@import 'pages/home';
 // @import 'pages/contact';
 
 // @import 'themes/theme';
