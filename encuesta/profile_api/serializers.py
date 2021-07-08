@@ -1,13 +1,17 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from profile_api.models import UserProfile
 
-class UserSerializer(serializers.Serializer):
-    """ Serializa un campo para probar nuestro APIView"""
-    id = serializers.ReadOnlyField()
+class UserTokenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile()
+        fields = ('name','email')
 
-    email = serializers.EmailField()
-    name= serializers.CharField()
-    password = serializers.CharField()
+class UserSerializer(serializers.ModelSerializer):
+    """ Serializa un campo para probar nuestro APIView"""
+    class Meta:
+        model = UserProfile
+        fields = "__all__"
 
     def create(self, validated_data):
         ##Validated_data es un diccionario que contiene todos los fields enviados
@@ -17,6 +21,7 @@ class UserSerializer(serializers.Serializer):
         user.email = validated_data.get("email")
         user.set_password(validated_data.get("password"))
         user.save()
+        
 
         return user
 
@@ -27,3 +32,15 @@ class UserSerializer(serializers.Serializer):
         else:
             return data
     
+#Se usara para listar todos los usuarios solicitados por get
+class ListUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+
+    def to_representation(self,instance):
+        return{
+            'id': instance['id'],
+            'name': instance['name'],
+            'email': instance['email'],
+            'password': instance['password']
+        }
