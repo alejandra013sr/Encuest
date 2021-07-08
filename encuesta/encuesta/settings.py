@@ -47,10 +47,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'profile_api'
+    'profile_api',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -139,3 +141,17 @@ STATIC_ROOT = '/code/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'profile_api.UserProfile'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+
+]
+
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://\w+\.localhost:3000$",
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+
+]
