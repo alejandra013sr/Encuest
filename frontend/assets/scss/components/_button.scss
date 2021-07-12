@@ -1,0 +1,35 @@
+.button {
+	appearance: none;
+	border: none;
+	background: #ffffff;
+	border-radius: 20px;
+	padding: 5px 45px;
+	color: #ffffff;
+	margin: 10px;
+
+	&--backgroundGradient {
+		background: rgb(0,217,222);
+		background: linear-gradient(90deg, rgba(0,217,222,1) 0%, rgba(157,80,243,1) 72%, rgba(249,0,255,1) 100%);
+	}
+
+	&--borderGradient {
+		position: relative;
+		color: #000000;
+		border: solid 2px transparent;
+		background-clip: padding-box;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: -1;
+			border-radius: 20px;
+			margin: -2px;
+			background: linear-gradient(90deg, rgba(0,217,222,1) 0%, rgba(157,80,243,1) 72%, rgba(249,0,255,1) 100%);
+
+		}
+	}
+}

@@ -2,7 +2,7 @@
   <div class="home__wrapper principal">
     <header class="home__header">
       <div class="home__logo">
-        <Logo />
+        <Logo width="40%" />
       </div>
       <div class="home__title">
         <span>Bienvenido a</span>
@@ -13,7 +13,7 @@
       </div>
     </header>
     <main class="home__main">
-      <a class="home__option">Login</a>
+      <NuxtLink to="/login" class="home__option">Login</NuxtLink>
       <a class="home__option">Register</a>
     </main>
   </div>
