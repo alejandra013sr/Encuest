@@ -14,7 +14,7 @@
     </header>
     <main class="home__main">
       <NuxtLink to="/login" class="home__option">Login</NuxtLink>
-      <a class="home__option">Register</a>
+      <NuxtLink to="/register" class="home__option">Register</NuxtLink>
     </main>
   </div>
 </template>
