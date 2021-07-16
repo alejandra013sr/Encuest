@@ -45,11 +45,9 @@ export default {
 	methods: {
 		async register(){
 			const res = await this.$axios.$post('http://localhost:8000/profile/users/', {
-				data: {
-					name: this.name,
-					email: this.email,
-					password: this.pass
-				}
+				"name": this.name,
+				"email": this.email,
+				"password": this.pass
 			});
 			console.log(res);
 		}
