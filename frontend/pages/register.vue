@@ -5,15 +5,16 @@
 				<Logo width="80px" background="horizontalGradient" />
 			</div>
 			<div class="login__title">
-				<span>Inicia sesión </span>
+				<span>Resgistrate</span>
 				<span>para continuar</span>
 			</div>
 		</header>
 		<main class="login__main">
 			<form class="login__form" @submit.prevent>
+				<InputText v-model="name" name="name" placeholder="Nombre" />
 				<InputEmail v-model="email" name="email" placeholder="Correo" />
 				<InputPassword v-model="pass" name="password" placeholder="Contraseña" />
-				<Button class="button--backgroundGradient" @click="login">Log in</Button>
+				<Button class="button--backgroundGradient" @click="register">Resgistrarme</Button>
 			</form>	
 			<div class="login__links">
 				<Button class="button--borderGradient">Google</Button>
@@ -22,9 +23,9 @@
 			</div>
 		</main>
 		<footer class="login__footer">
-			<span>¿No tienes una cuenta?.</span>
+			<span>¿Ya tienes una cuenta?.</span>
 			<b>
-				<NuxtLink to='/register' href="#">Registrate</NuxtLink>
+				<NuxtLink to="/login" href="#">Ingresar</NuxtLink>
 			</b>
 		</footer>
 
@@ -33,24 +34,22 @@
 <script>
 	
 export default {
-	name: 'Login',
+	name: 'Register',
 	data(){
 		return {
+			name: '',
 			email: '',
 			pass: ''
 		}
 	},
 	methods: {
-		async login(){
-			console.log('Todavia no funciona');
-			// const res = await this.$axios.$post('http://localhost:8000/profile/users/', {
-			// 	data: {
-			// 		name: 'Prueba',
-			// 		email: this.email,
-			// 		password: this.pass
-			// 	}
-			// });
-			// console.log(res);
+		async register(){
+			const res = await this.$axios.$post('http://localhost:8000/profile/users/', {
+				"name": this.name,
+				"email": this.email,
+				"password": this.pass
+			});
+			console.log(res);
 		}
 	}
 }

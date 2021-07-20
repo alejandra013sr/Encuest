@@ -1,9 +1,9 @@
 <template>
 	<div class="input">
 		<input 
-			type="password" 
+			type="text" 
 			:name="name" 
-			:placeholder="placeholder" 
+			:placeholder="placeholder"
 			:value="value"
 			@input="$emit('input', $event.target.value)"
 		>
@@ -11,7 +11,7 @@
 </template>
 <script>
 export default {
-	name: 'InputPassword',
+	name: 'InputText',
 	props: {
 		name: String,
 		placeholder: String,
