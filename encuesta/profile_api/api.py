@@ -17,7 +17,7 @@ class UserAPI(APIView):
         users_serializer = ListUserSerializer(users, many = True)
         return Response(users_serializer.data)
 
-    def post(self,request):
+    def post(self,request): ##Sirve para el registro
         
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
@@ -26,3 +26,4 @@ class UserAPI(APIView):
         else:
             return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
+    

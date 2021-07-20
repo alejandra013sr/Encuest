@@ -1,38 +1,20 @@
-from django.core.exceptions import AppRegistryNotReady
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-
 from rest_framework import status
-from profile_api.serializers import UserSerializer
-# Create your views here.
 
-class HelloApiView(APIView):
-    """Api View de prueba """
+from rest_framework.authtoken.views import ObtainAuthToken
 
-    serializer_class = UserSerializer
 
-    def get(self,request, format=None):
-        username = request.GET.get('username')
+from .models import UserProfile
+from .serializers import loginSerializer
 
-        try:
-            user_token = Token.objects.get(
-                user= UserSerializer().Meta.model.objects.filter(username=username).first()
-            )
+class Login(ObtainAuthToken):
+    def post(self,request,*args,**kwargs):
+      
+        login_serializer = loginSerializer(data=request.data,context = {'request':request}) ##Este es un serializador que trae el obtain auth token, en la documentación aparece que solo tiene los campos de username y contraseña
 
-            return Response({'token': user_token.key})
-        except:
-            return Response({'error':'Credenciales enviadas incorrectas'}, status=status.HTTP_400_BAD_REQUEST)
+        if login_serializer.is_valid():
+            print("paso la validación")
 
-    def post(self,request):
-        """ Crea un mensaje con nuestro  nombre """
-        serializer = self.serializer_class(data = request.data)
+        return Response({'message':'Hola desde response'}, status = status.HTTP_200_OK)
 
-        if serializer.is_valid():
-            name = serializer.validated_data.get('name')
-            message = f'Hello {name}'
 
-            return Response({'message':message})
-
-        else:
-            return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)

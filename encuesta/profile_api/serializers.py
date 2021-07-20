@@ -1,3 +1,6 @@
+from decimal import Context
+from django.contrib.auth import authenticate
+
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from profile_api.models import UserProfile
@@ -31,6 +34,8 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Este email de usuario ya existe, ingrese uno nuevo")
         else:
             return data
+
+       
     
 #Se usara para listar todos los usuarios solicitados por get
 class ListUserSerializer(serializers.ModelSerializer):
@@ -44,3 +49,38 @@ class ListUserSerializer(serializers.ModelSerializer):
             'email': instance['email'],
             'password': instance['password']
         }
+
+class loginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+
+    def validate(self, data):
+        email = data.get('email')
+        password = data.get('password')
+        if email and password:
+            user = authenticate(request=self.context.get('request'), email=email,password=password)
+
+            if not user:
+                msg=("No se encontro un usuario con esas características")
+                raise serializers.ValidationError(msg, code='authorization')
+            else:
+                msg=("Si existe")
+
+            data['user']=user
+        return data 
+   
+    """
+    def validate(self, data):
+
+        # authenticate recibe las credenciales, si son válidas devuelve el objeto del usuario
+        user = authenticate(email=data['email'], password=data['password'])
+     
+        if not user:
+            print("no existe")
+            raise serializers.ValidationError('Las credenciales no son válidas')
+
+        # Guardamos el usuario en el contexto para posteriormente en create recuperar el token
+        self.context['user'] = user
+        return user
+"""
