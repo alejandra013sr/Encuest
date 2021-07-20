@@ -56,15 +56,19 @@ class loginSerializer(serializers.Serializer):
 
 
     def validate(self, data):
+
         email = data.get('email')
         password = data.get('password')
         if email and password:
+
             user = authenticate(request=self.context.get('request'), email=email,password=password)
 
             if not user:
+                print("No existe usuario")
                 msg=("No se encontro un usuario con esas características")
                 raise serializers.ValidationError(msg, code='authorization')
             else:
+                print("Si existe usuario")
                 msg=("Si existe")
 
             data['user']=user

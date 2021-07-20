@@ -1,1 +1,5 @@
 -Ruta para la creación de usuario (método post): profile/users/
+-Ruta para obtener todos los usuarios creados (método get): profile/users/
+-Ruta para el login (método post): /login/
+-Ruta para el logout (método post): /logout/
+
