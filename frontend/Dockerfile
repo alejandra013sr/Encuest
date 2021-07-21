@@ -1,14 +1,14 @@
 FROM node:14.16.0-alpine
 
 # create destination directory
-RUN mkdir -p /usr/src/encuesta
-WORKDIR /usr/src/encuesta
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
 # update and install dependency
 RUN apk update && apk upgrade
 
 # copy the app, note .dockerignore
-COPY . /usr/src/encuesta/
+COPY . /usr/src/app/
 RUN npm install
 
 # build necessary, even if no static files are needed,

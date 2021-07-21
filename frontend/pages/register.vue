@@ -1,15 +1,10 @@
 <template>
 	<div class="login">
-		<header class="login__header">
-			<div class="login__logo">
-				<Logo width="80px" background="horizontalGradient" />
-			</div>
+		<main class="login__main">
 			<div class="login__title">
 				<span>Resgistrate</span>
 				<span>para continuar</span>
 			</div>
-		</header>
-		<main class="login__main">
 			<form class="login__form" @submit.prevent>
 				<InputText v-model="name" name="name" placeholder="Nombre" />
 				<InputEmail v-model="email" name="email" placeholder="Correo" />
@@ -34,6 +29,7 @@
 <script>
 	
 export default {
+	layout: 'home',
 	name: 'Register',
 	data(){
 		return {
