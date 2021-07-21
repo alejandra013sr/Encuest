@@ -1,15 +1,10 @@
 <template>
 	<div class="login">
-		<header class="login__header">
-			<div class="login__logo">
-				<Logo width="80px" background="horizontalGradient" />
-			</div>
+		<main class="login__main">
 			<div class="login__title">
-				<span>Inicia sesión </span>
+				<span>Inicia sesion</span>
 				<span>para continuar</span>
 			</div>
-		</header>
-		<main class="login__main">
 			<form class="login__form" @submit.prevent>
 				<InputEmail v-model="email" name="email" placeholder="Correo" />
 				<InputPassword v-model="pass" name="password" placeholder="Contraseña" />
@@ -34,6 +29,8 @@
 	
 export default {
 	name: 'Login',
+	transition: 'auth',
+	layout: 'home',
 	data(){
 		return {
 			email: '',
@@ -52,6 +49,9 @@ export default {
 			// });
 			// console.log(res);
 		}
+	},
+	created(){
+		// console.log(this.$nuxt.$route);
 	}
 }
 
