@@ -73,11 +73,13 @@ class Login(ObtainAuthToken):
 
 class Logout(APIView):
 
-    def post(self,request, *args,**kwargs):
+    def get(self,request, *args,**kwargs):
         try: 
-            token = request.POST.get('token')
+            token = request.GET.get('token')
             token = Token.objects.filter(key=token).first()
+            
             if token:
+                
                 user = token.user
                 
                 all_sessions = Session.objects.filter(expire_date__gte = datetime.now())

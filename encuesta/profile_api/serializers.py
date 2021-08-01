@@ -73,6 +73,8 @@ class loginSerializer(serializers.Serializer):
 
             data['user']=user
         return data 
+
+    
    
     """
     def validate(self, data):
