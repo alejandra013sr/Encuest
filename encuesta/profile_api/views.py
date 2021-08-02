@@ -74,7 +74,7 @@ class Login(ObtainAuthToken):
 
 class Logout(APIView):
 
-    def get(self,request, *args,**kwargs):
+    def post(self,request, *args,**kwargs):
         try: 
             token = request.headers.get('Authorization')
             print(token)
