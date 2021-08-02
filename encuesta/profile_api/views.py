@@ -29,6 +29,7 @@ class Login(ObtainAuthToken):
             user_serializer = UserTokenSerializer(user)
             """
             user = login_serializer.validated_data['user']
+           
             user_serializer = UserTokenSerializer(user)
                     
             
@@ -75,7 +76,8 @@ class Logout(APIView):
 
     def get(self,request, *args,**kwargs):
         try: 
-            token = request.GET.get('token')
+            token = request.headers.get('Authorization')
+            print(token)
             token = Token.objects.filter(key=token).first()
             
             if token:

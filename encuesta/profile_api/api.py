@@ -15,7 +15,7 @@ class UserAPI(APIView):
     def get(self,request):
         users = UserProfile.objects.all().values('id','name','email','password')
         users_serializer = ListUserSerializer(users, many = True)
-        return Response(users_serializer.data)
+        return Response(users_serializer.data, status=status.HTTP_200_OK)
 
     def post(self,request): ##Sirve para el registro
         
