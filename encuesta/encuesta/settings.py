@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'profile_api',
+    'imagenes',
+
     'corsheaders'
 ]
 
@@ -155,3 +157,6 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
 
 ]
+
+MEDIA_URL = '/archivos/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
