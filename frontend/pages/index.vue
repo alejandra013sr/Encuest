@@ -15,8 +15,9 @@
 <script>
 export default {
   layout: 'home',
-  created(){
-    // console.log(this.$nuxt.$route);
+  async created(){
+    const res = await this.$axios.$get('profile/users/');
+    console.log(res);
   }
 }
 </script>

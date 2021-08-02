@@ -40,12 +40,23 @@ export default {
 	},
 	methods: {
 		async register(){
-			const res = await this.$axios.$post('http://localhost:8000/profile/users/', {
-				"name": this.name,
-				"email": this.email,
-				"password": this.pass
-			});
-			console.log(res);
+			try {
+				const res = await this.$axios.$post('http://localhost:8000/profile/users/', {
+					"name": this.name,
+					"email": this.email,
+					"password": this.pass
+				});
+				console.log(res);
+				const resauth = await this.$auth.loginWith('local', {
+					data: {
+						email: this.email,
+						password: this.pass
+					}
+				});
+				console.log(resauth);
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	}
 }

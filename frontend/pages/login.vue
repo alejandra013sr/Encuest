@@ -39,19 +39,14 @@ export default {
 	},
 	methods: {
 		async login(){
-			console.log('Todavia no funciona');
-			// const res = await this.$axios.$post('http://localhost:8000/profile/users/', {
-			// 	data: {
-			// 		name: 'Prueba',
-			// 		email: this.email,
-			// 		password: this.pass
-			// 	}
-			// });
-			// console.log(res);
+			const resauth = await this.$auth.loginWith('local', {
+					data: {
+						email: this.email,
+						password: this.pass
+					}
+				});
+				console.log(resauth);
 		}
-	},
-	created(){
-		// console.log(this.$nuxt.$route);
 	}
 }
 
