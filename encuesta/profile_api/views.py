@@ -77,6 +77,7 @@ class Logout(APIView):
     def post(self,request, *args,**kwargs):
         try: 
             token = request.headers.get('Authorization')
+            token=token.strip('Bearer ')
             print(token)
             token = Token.objects.filter(key=token).first()
             
