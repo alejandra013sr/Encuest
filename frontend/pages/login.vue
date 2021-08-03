@@ -13,7 +13,6 @@
 			<div class="login__links">
 				<Button class="button--borderGradient">Google</Button>
 				<Button class="button--borderGradient">Facebook</Button>
-				<div>{{email}}</div>
 			</div>
 		</main>
 		<footer class="login__footer">
@@ -40,12 +39,14 @@ export default {
 	methods: {
 		async login(){
 			const resauth = await this.$auth.loginWith('local', {
-					data: {
-						email: this.email,
-						password: this.pass
-					}
-				});
-				console.log(resauth);
+				data: {
+					email: this.email,
+					password: this.pass
+				}
+			});
+			this.$auth.setUser(resauth.data.user);
+			console.log(resauth);
+			this.$router.push('/dashboard');
 		}
 	}
 }
