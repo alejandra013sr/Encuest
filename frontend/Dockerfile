@@ -1,21 +1,21 @@
 FROM node:14.16.0-alpine
 
 # create destination directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /usr/src/encuesta
+WORKDIR /usr/src/encuesta
 
 # update and install dependency
 RUN apk update && apk upgrade
 
-# copy the app, note .dockerignore
-COPY . /usr/src/app/
-RUN yarn install
+# copy the encuesta, note .dockerignore
+COPY . /usr/src/encuesta/
+RUN npm install
  
 
 
 # build necessary, even if no static files are needed,
 # since it builds the server as well
-RUN yarn run build
+RUN npm run build
 
 
 # expose 3000 on container
@@ -27,4 +27,4 @@ ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000
 
 # start the app
-CMD [ "yarn", "start" ]
+CMD [ "npm", "start" ]
