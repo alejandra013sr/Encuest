@@ -72,6 +72,24 @@ class Login(ObtainAuthToken):
 
         return Response({'message':'Hola desde response'}, status = status.HTTP_200_OK)
 
+    def get(self,request, *args, **kwargs):
+        try: 
+            token = request.headers.get('Authorization')
+            token=token.strip('Bearer ')
+            print(token)
+            token = Token.objects.filter(key=token).first()
+
+            if token:
+                user = token.user
+                user = UserTokenSerializer(user)
+                
+
+                return Response({"user":user.data})
+        except:
+            return Response({"error":"token no recibido"},status=status.HTTP_400_BAD_REQUEST)
+                
+
+
 class Logout(APIView):
 
     def post(self,request, *args,**kwargs):
@@ -103,3 +121,5 @@ class Logout(APIView):
 
         except:
             return Response({'error': 'No se ha encontrado un token en la petición'}, status=status.HTTP_409_CONFLICT)
+
+   
