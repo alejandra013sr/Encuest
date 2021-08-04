@@ -1,14 +1,21 @@
-from imagenes.models import Imagen
 
+from drf_extra_fields.fields import Base64ImageField
+
+
+from imagenes.models import Imagen
 from rest_framework import serializers
 
-class ImagenSerializer(serializers.Serializer):
+
+
+class ImagenSerializer(serializers.ModelSerializer):
+    image = Base64ImageField(required=False)
     class Meta:
         model = Imagen
-        fields= "__all__"
+        fields= ('title','description','image')
+  
 
     def create(self, validated_data):
-        print(validated_data.get("title"))
+      
         ##Validated_data es un diccionario que contiene todos los fields enviados
         image = Imagen()
         image.title = validated_data.get("title")
@@ -17,5 +24,10 @@ class ImagenSerializer(serializers.Serializer):
         image.save()
 
         return image
+    
+
+
+
+
 
         

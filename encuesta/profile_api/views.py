@@ -76,7 +76,7 @@ class Login(ObtainAuthToken):
         try: 
             token = request.headers.get('Authorization')
             token=token.strip('Bearer ')
-            print(token)
+      
             token = Token.objects.filter(key=token).first()
 
             if token:
@@ -84,7 +84,7 @@ class Login(ObtainAuthToken):
                 user = UserTokenSerializer(user)
                 
 
-                return Response({"user":user.data})
+                return Response({"user":user.data},status=status.HTTP_200_OK)
         except:
             return Response({"error":"token no recibido"},status=status.HTTP_400_BAD_REQUEST)
                 

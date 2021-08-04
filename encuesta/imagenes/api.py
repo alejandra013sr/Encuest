@@ -1,4 +1,5 @@
 from rest_framework import response
+from rest_framework.serializers import Serializer
 from imagenes.models import Imagen
 from imagenes.serializers import ImagenSerializer
 
@@ -15,9 +16,15 @@ class ImagenAPI(APIView):
 
     def post(self,request):
         imagen_serializer = ImagenSerializer(data=request.data)
-        print(imagen_serializer.data)
+        
         if imagen_serializer.is_valid():
-            imagen_serializer.save()
+            validated_data = imagen_serializer.validated_data
+            
+            #Convertir y guardar el modelo
+            imagen = Imagen(**validated_data)
+            imagen.save()
+
+            imagen_serializer=ImagenSerializer(imagen)
             return Response(imagen_serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response({'message': 'No se pudo guardar correctamente'},status=status.HTTP_400_BAD_REQUEST)
