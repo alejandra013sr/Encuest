@@ -44,7 +44,8 @@ class ImagenAPI(APIView):
         return image
 
     def delete(self,request,pk):
+
         image = self.get_object(pk)
         image.image.delete(save=True)
         image.delete()
-        return Response({"mensaje":"Imagen borrada"}, status=status.HTTP_200_OKs)
+        return Response({"mensaje":"Imagen borrada"}, status=status.HTTP_200_OK)

@@ -13,7 +13,7 @@ class ImagenSerializer(serializers.ModelSerializer):
     image = Base64ImageField(required=False)
     class Meta:
         model = Imagen
-        fields= ('title','description','image','user')
+        fields= ('title','description','image','user','id')
   
     #No se esta llamando porque no se esta ejecutando un save() en el serializer que esta en api
     def create(self, validated_data):
