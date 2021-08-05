@@ -39,13 +39,14 @@ class ImagenAPI(APIView):
             return Response({'message': 'No se pudo guardar correctamente'},status=status.HTTP_400_BAD_REQUEST)
 
 
-    def get_object(self,pk):
-        image = get_object_or_404(Imagen,pk)
-        return image
 
-    def delete(self,request,pk):
+    def delete(self,request):
+        try:
+            image = Imagen.objects.filter(id=request.data["id"]).first()
+            
+            image.image.delete(save=True)
+            image.delete()
 
-        image = self.get_object(pk)
-        image.image.delete(save=True)
-        image.delete()
-        return Response({"mensaje":"Imagen borrada"}, status=status.HTTP_200_OK)
+            return Response({"mensaje":"Imagen borrada"}, status=status.HTTP_200_OK)
+        except:
+            return Response({"Error":"La imagen no existe"}, status=status.HTTP_400_BAD_REQUEST)
