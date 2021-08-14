@@ -26,11 +26,6 @@ export default {
     isAuthenticated(){
       return this.$store.state.auth.loggedIn;
     }
-  },
-  async created(){
-    console.log(this);
-    const res = await this.$axios.$get('profile/users/');
-    console.log(res);
   }
 }
 </script>

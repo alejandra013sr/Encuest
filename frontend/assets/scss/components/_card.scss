@@ -1,0 +1,18 @@
+.card {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 3px 10px 1px #525151;
+
+  &__wrapper {
+    padding: 10px 5px;
+  }
+
+  &__main {
+    padding: 10px;
+    width: 100%;
+  }
+}

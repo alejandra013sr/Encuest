@@ -1,0 +1,25 @@
+.dashboard {
+
+  background: rgb(0,217,222);
+  background: linear-gradient(135deg, rgba(0,217,222,1) 0%, rgba(157,80,243,1) 72%, rgba(249,0,255,1) 100%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  header {
+
+  }
+  main {
+    flex-grow: 1;
+    margin-bottom: 40px;
+    overflow-y: auto;
+  }
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px -2px 10px #7b7373;
+  }
+}

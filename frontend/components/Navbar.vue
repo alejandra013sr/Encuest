@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <h1>APP</h1>
-    <span v-if="isAuthenticated">Hola</span>
+  <div class="navbar">
+    <h1>Hola User!!</h1>
     <div v-if="isAuthenticated">
       <button @click="logout">Logout</button>
     </div>

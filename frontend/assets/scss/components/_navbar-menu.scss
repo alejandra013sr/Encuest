@@ -1,0 +1,49 @@
+.navbar-menu {
+  height: 40px;
+  display: flex;
+  background: #009688;
+  position: relative;
+  // overflow: hidden;
+
+  svg {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    top: 0;
+  }
+
+  &__wrapper { 
+  }
+
+  &__circle {
+    // display: none;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 300ms;
+
+    .circle {
+      transition: all 2s;
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background: red;
+      border-radius: 50%;
+      background: rgb(0,217,222);
+      background: linear-gradient(135deg, rgba(0,217,222,1) 0%, rgba(157,80,243,1) 72%, rgba(249,0,255,1) 100%);
+    }
+  }
+
+  &__item {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 25px;
+    height: 25px;
+    background: white;
+    border-radius: 50%;
+  }
+}

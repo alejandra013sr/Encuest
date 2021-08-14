@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <span>{{ isAuthenticated }}</span>
-    <div>{{ loggedUser }}</div>
+  <div class="container">
+    <Card v-for="i in 5" :key="`n${i}`"/>
   </div>
 </template>
 <script>

@@ -1,4 +1,4 @@
-// @import 'abstracts/variables';
+@import 'utils/helpers';
 // @import 'abstracts/functions';
 // @import 'abstracts/mixins';
 // @import 'abstracts/placeholders';
@@ -21,10 +21,14 @@
 @import 'components/logo';
 @import 'components/input';
 @import 'components/button';
-// @import 'components/dropdown';
+@import 'components/navbar';
+@import 'components/navbar-menu';
+@import 'components/navbar-menu2';
+@import 'components/card';
 
 @import 'pages/home';
 @import 'pages/login';
+@import 'pages/dashboard';
 
 // @import 'themes/theme';
 // @import 'themes/admin';

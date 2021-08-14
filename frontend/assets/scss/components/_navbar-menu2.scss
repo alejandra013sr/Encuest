@@ -1,0 +1,80 @@
+.navbar-menu2 {
+  height: 40px;
+  display: flex;
+  background: #ffffff;
+  position: relative;
+
+  &__wrapper { 
+  }
+
+  &__circle {
+    // display: none;
+    position: absolute;
+    .circle {
+      // display: none;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      transition: all 200ms;
+      background: #ffffff;
+
+      svg path {
+        fill: transparent;
+        stroke-width: 40px;
+        stroke: #000000;
+        stroke-dasharray: 2000;
+      }
+    }
+  }
+  &__bg {
+    background: rgb(0,217,222);
+    background: linear-gradient(135deg, rgba(0,217,222,1) 0%, rgba(157,80,243,1) 72%, rgba(249,0,255,1) 100%);
+    background-position-x: 50%;
+    background-position-y: calc(100% + 5px);
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: -15px;
+    border-radius: 15px;
+    overflow: hidden;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s;
+
+    &--show {
+      opacity: 1;
+    }
+  }
+
+  &__item {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    div {
+      opacity: 1;
+      transform: translateY(0px);
+      transition-property: opacity,transform;
+      transition-duration: 2000ms;
+      // transition-delay: 1000ms;
+
+    }
+    .hide {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  }
+
+  &__icon {
+    svg path {
+      fill: transparent;
+      stroke-width: 40px;
+      stroke: #bdbdbd;
+    }
+  }
+}
