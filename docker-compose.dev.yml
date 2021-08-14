@@ -10,9 +10,9 @@ services:
       - '8000:8000'
   frontend:
     build: './frontend'
-    command: 'npm dev'
+    command: 'yarn dev'
     volumes:
-      - './frontend:/usr/src/app'
+      - './frontend:/usr/src/encuesta'
     ports:
       - '3000:3000'
     
