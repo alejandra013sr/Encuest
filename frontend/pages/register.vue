@@ -53,7 +53,6 @@ export default {
 						password: this.pass
 					}
 				});
-				this.$auth.setUser(resauth);
 				this.$router.push('/dashboard');
 				console.log(resauth);
 			} catch (error) {
