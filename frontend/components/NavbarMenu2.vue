@@ -40,7 +40,7 @@ export default {
     return {
       options: [
         { icon: 'user', link: '/profile' },
-        { icon: 'images', link: '/images' },
+        { icon: 'images', link: '/dashboard' },
         { icon: 'home', link: '/dashboard' },
         { icon: 'bolt', link: '/dashboard' },
         { icon: 'plus', link: '/add-image' }

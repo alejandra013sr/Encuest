@@ -44,7 +44,6 @@ export default {
 					password: this.pass
 				}
 			});
-			this.$auth.setUser(resauth.data.user);
 			console.log(resauth);
 			this.$router.push('/dashboard');
 		}

@@ -13,6 +13,7 @@ services:
     command: 'yarn dev'
     volumes:
       - './frontend:/usr/src/encuesta'
+      # - '/usr/src/encuesta/node_modules'
     ports:
       - '3000:3000'
     

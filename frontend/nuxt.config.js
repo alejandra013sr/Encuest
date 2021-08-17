@@ -52,23 +52,19 @@ export default {
   auth: {
     strategies: {
       local: {
-        user: {
-          autoFetch: false
-        },
         endpoints: {
           login: {
             url: '/login/',
             method: 'post'
           },
-          register: {
-            url: '/users/',
-            method: 'post'
+          user: {
+            url: '/login/',
+            method: 'get'
           },
           logout: {
             url: '/logout/',
             method: 'post'
-          },
-          user: false
+          }
         }
       }
     }
