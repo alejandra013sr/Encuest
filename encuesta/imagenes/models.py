@@ -7,7 +7,7 @@ from profile_api.models import UserProfile
 
 class LikeImage(models.Model):
     like_image=models.ManyToManyField(UserProfile, null=True)
-    cant_likes= models.PositiveBigIntegerField(default=0)
+    cant_likes= models.IntegerField(default=0)
 
 
     def __str__(self):
