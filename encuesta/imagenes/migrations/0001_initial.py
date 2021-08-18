@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             name='LikeImage',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('cant_likes', models.PositiveBigIntegerField(default=0)),
+                ('cant_likes', models.IntegerField(default=0)),
                 ('id_image', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='imagenes.imagen')),
                 ('like_image', models.ManyToManyField(null=True, to=settings.AUTH_USER_MODEL)),
             ],

@@ -46,6 +46,17 @@ class ImagenAPI(APIView):
 
 
 
+class ImageUserAPI(APIView):
+    def get(self,request):
+        try:
+            user_image= UserProfile.objects.get(email=request.data["email"])
+            imagenes = Imagen.objects.filter(user=user_image)
+            imagenes_serializer = ImagenSerializer(imagenes, many=True)
+            
+            return Response({'imagenes':imagenes_serializer.data}, status=status.HTTP_200_OK)
+        except:
+            return Response({'mensaje':'El usuario no tiene imagenes'})
+
     def delete(self,request):
         try:
             image = Imagen.objects.filter(id=request.data["id"]).first()
@@ -59,6 +70,8 @@ class ImagenAPI(APIView):
             return Response({"mensaje":"Imagen borrada"}, status=status.HTTP_200_OK)
         except:
             return Response({"Error":"La imagen no existe"}, status=status.HTTP_400_BAD_REQUEST)
+        
+
 
 class LikeImageAPI(APIView):
 
