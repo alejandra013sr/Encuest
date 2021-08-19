@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from rest_framework.authtoken.models import Token
 
 class ImagenAPI(APIView):
 
@@ -49,7 +50,13 @@ class ImagenAPI(APIView):
 class ImageUserAPI(APIView):
     def get(self,request):
         try:
-            user_image= UserProfile.objects.get(email=request.data["email"])
+            token = request.headers.get('Authorization')
+            token=token.strip('Bearer ')
+            token = Token.objects.filter(key=token).first()
+
+            user_image=token.user
+
+        
             imagenes = Imagen.objects.filter(user=user_image)
             imagenes_serializer = ImagenSerializer(imagenes, many=True)
             
