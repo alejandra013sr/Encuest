@@ -200,7 +200,8 @@ export default {
               }
             ],
             {
-              duration: 800,
+              // delay: 500,
+              duration: 1800,
               fill: 'forwards',
               easing: 'ease'
             }

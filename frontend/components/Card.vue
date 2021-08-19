@@ -16,7 +16,8 @@
 <script>
   
 export default {
-  name: 'Card'
+  name: 'Card',
+  transitio: 'card'
 }
 
 </script>
