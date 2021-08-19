@@ -32,6 +32,8 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     name= models.CharField(max_length=255, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    created = models.DateTimeField(auto_now_add=True, blank=True,null=True)
+    updated =models.DateTimeField(auto_now=True, blank=True,null=True)
     
     objects = UserProfileManager()
   

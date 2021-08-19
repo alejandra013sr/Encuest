@@ -2,7 +2,7 @@
 from drf_extra_fields.fields import Base64ImageField
 
 
-from imagenes.models import Imagen
+from imagenes.models import Imagen, LikeImage
 from rest_framework import serializers
 
 from profile_api.models import UserProfile
@@ -26,6 +26,12 @@ class ImagenSerializer(serializers.ModelSerializer):
         image.save()
 
         return image
+    
+class LikeImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LikeImage
+        fields = ('cant_likes','id')
+
     
 
 
