@@ -2,6 +2,10 @@
   <div class="container">
     <Card v-for="image in images" :key="image.id">
       <template v-slot:header>
+          <font-awesome-icon 
+            icon="heart"
+            color="#607d8b"
+          />
         <h3>{{image.title}}</h3>
         {{image.id}}
         <button @click="deleteImage(image.id)">

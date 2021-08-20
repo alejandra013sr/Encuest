@@ -1,6 +1,5 @@
 <template>
   <div class="navbar">
-    <h1>Hola User!!</h1>
     <div v-if="isAuthenticated">
       <button @click="logout">Logout</button>
     </div>
@@ -13,6 +12,9 @@ export default {
   computed: {
     isAuthenticated(){
       return this.$store.getters.isAuthenticated;
+    },
+    user(){
+      return this.$store.getters.loggedUser;
     }
   },
   methods: {
