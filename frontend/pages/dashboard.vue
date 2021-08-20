@@ -2,11 +2,21 @@
   <div class="container">
     <Card v-for="image in images" :key="image.id">
       <template v-slot:header>
+          <font-awesome-icon 
+            icon="heart"
+            color="#607d8b"
+          />
         <h3>{{image.title}}</h3>
+        {{image.id}}
+        <button @click="deleteImage(image.id)">
+          <font-awesome-icon 
+            icon="trash-alt"
+            color="#607d8b"
+          />
+        </button>
       </template>
         <img class="image" :src="`http://localhost:8000${image.image}`">
         <p>{{image.description}}</p>
-
     </Card>
   </div>
 </template>
@@ -19,26 +29,22 @@ export default {
   layout: 'dashboard',
   data(){
     return {
-      images: []
+
     }
   },
   computed: {
-    ...mapGetters(['isAuthenticated', 'loggedUser'])
+    ...mapGetters(['isAuthenticated', 'loggedUser']),
+    images(){
+      return this.$store.state.images
+    }
   },
   methods: {
-    async getImages(){
-      try {
-        const res = await this.$axios.get('/imagenes/image');
-        console.log(res);
-        this.images = res.data;
-        console.log(this.images);
-      } catch (error) {
-        console.log(error);
-      }
+    deleteImage(id){
+      this.$store.dispatch('deleteImage', id);
     }
   },
   created(){
-    this.getImages();
+    this.$store.dispatch('images');
   }
 }
 
