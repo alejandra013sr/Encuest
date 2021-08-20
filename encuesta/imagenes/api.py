@@ -1,10 +1,11 @@
 
-from django.contrib.auth.models import User
-from rest_framework.serializers import Serializer
+
+
 from imagenes.models import Imagen, LikeImage
 from imagenes.serializers import ImagenSerializer, LikeImageSerializer
 
 from profile_api.models import UserProfile
+from profile_api.serializers import ListUserSerializer
 
 from rest_framework.views import APIView
 from rest_framework import status
@@ -51,12 +52,12 @@ class ImageUserAPI(APIView):
     def get(self,request):
         try:
             token = request.headers.get('Authorization')
+            
             token=token.strip('Bearer ')
             token = Token.objects.filter(key=token).first()
-
+            
             user_image=token.user
 
-        
             imagenes = Imagen.objects.filter(user=user_image)
             imagenes_serializer = ImagenSerializer(imagenes, many=True)
             
@@ -94,29 +95,39 @@ class LikeImageAPI(APIView):
     def put(self,request,format=None):
         try: 
             #Recojo los datos (pk se pasa por la url y el email por el body)
-            user = UserProfile.objects.filter(email=request.data["email"]).first()
+            token = request.headers.get('Authorization')
+            token=token.strip('Bearer ')
+           
+            token = Token.objects.filter(key=token).first()
+            
+            if token:
+                
+                user = token.user
+  
             image = Imagen.objects.get(pk=request.data["id"])
             like=LikeImage.objects.get(id=image.like_image.id)
            
-            aux = LikeImage.objects.filter(like_image__id=user.id)
+            aux = LikeImage.objects.filter(id=like.id,like_image__id=user.id)
            
+            #Serializo el usuario en general
+            user_serializer=ListUserSerializer(user)
             #Cambio datos(agregar a la lista si el usuario no ha reaccionado)
             if not(aux):
                 like.cant_likes +=1
                 like.like_image.add(user)
-
                 like.save()
 
                 like_serializer= LikeImageSerializer(like)
+                
             
-                return Response({'Imagen':like_serializer.data,'mensaje':'El usuario dio like'}, status=status.HTTP_200_OK)
+                return Response({'Imagen':like_serializer.data,'Usuario':user_serializer.data,'mensaje':'El usuario dio like'}, status=status.HTTP_200_OK)
             #Cambio datos(elimino de la lista si el usuario ya reacciono y quito su like)
             else:
                 like.cant_likes-=1
                 like.like_image.remove(user.id)
                 like.save()
                 like_serializer= LikeImageSerializer(like)
-                return Response({'Image':like_serializer.data,'mensaje':'el usuario ya reacciono a esta historia'}, status=status.HTTP_302_FOUND)
+                return Response({'Image':like_serializer.data,'Usuario':user_serializer.data,'mensaje':'el usuario quito el like'}, status=status.HTTP_302_FOUND)
         except:
             return Response({'Error':'No existe'}, status=status.HTTP_400_BAD_REQUEST)
 

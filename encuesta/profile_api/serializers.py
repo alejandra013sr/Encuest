@@ -41,13 +41,13 @@ class UserSerializer(serializers.ModelSerializer):
 class ListUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
+        fields = ('id','name','email')
 
     def to_representation(self,instance):
         return{
-            'id': instance['id'],
-            'name': instance['name'],
-            'email': instance['email'],
-            'password': instance['password']
+            'id': instance.id,
+            'name': instance.name,
+            'email': instance.email,
         }
 
 class loginSerializer(serializers.Serializer):

@@ -1,4 +1,5 @@
 
+from django.contrib.auth.models import User
 from drf_extra_fields.fields import Base64ImageField
 
 
@@ -30,7 +31,21 @@ class ImagenSerializer(serializers.ModelSerializer):
 class LikeImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = LikeImage
-        fields = ('cant_likes','id')
+        fields = ('id','cant_likes')
+
+    def to_representation(self,instance):
+      
+        return {
+            'id_like': instance.id,
+            'cant_likes_image': instance.cant_likes,
+        
+        }
+
+
+        
+        
+
+        
 
     
 

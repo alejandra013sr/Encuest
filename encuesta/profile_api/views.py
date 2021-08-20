@@ -15,8 +15,6 @@ from .serializers import loginSerializer, UserTokenSerializer
 
 class Login(ObtainAuthToken):
 
-
-
     def post(self,request,*args,**kwargs):
       
         login_serializer = loginSerializer(data=request.data,context = {'request':request}) ##Este es un serializador que trae el obtain auth token, en la documentación aparece que solo tiene los campos de username y contraseña
@@ -96,7 +94,7 @@ class Logout(APIView):
         try: 
             token = request.headers.get('Authorization')
             token=token.strip('Bearer ')
-            print(token)
+           
             token = Token.objects.filter(key=token).first()
             
             if token:
