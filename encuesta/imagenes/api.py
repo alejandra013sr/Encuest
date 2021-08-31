@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token
 
+#Crear y obtener todas las imágenes
 class ImagenAPI(APIView):
 
     def get(self,request):
@@ -47,7 +48,7 @@ class ImagenAPI(APIView):
             return Response({'message': 'No se pudo guardar correctamente'},status=status.HTTP_400_BAD_REQUEST)
 
 
-
+#Conseguir imagenes de un solo usuario y borrar imagenes
 class ImageUserAPI(APIView):
     def get(self,request):
         try:
@@ -63,7 +64,7 @@ class ImageUserAPI(APIView):
             
             return Response({'imagenes':imagenes_serializer.data}, status=status.HTTP_200_OK)
         except:
-            return Response({'mensaje':'El usuario no tiene imagenes'})
+            return Response({'mensaje':'El usuario no tiene imagenes'}, status=status.HTTP_204_NO_CONTENT)
 
     def delete(self,request):
         try:
@@ -80,7 +81,7 @@ class ImageUserAPI(APIView):
             return Response({"Error":"La imagen no existe"}, status=status.HTTP_400_BAD_REQUEST)
         
 
-
+#Poner like en una imagen
 class LikeImageAPI(APIView):
 
     def get(self,request,pk, format=None):
@@ -115,6 +116,8 @@ class LikeImageAPI(APIView):
             if not(aux):
                 like.cant_likes +=1
                 like.like_image.add(user)
+                like.op=True
+
                 like.save()
 
                 like_serializer= LikeImageSerializer(like)
@@ -125,6 +128,7 @@ class LikeImageAPI(APIView):
             else:
                 like.cant_likes-=1
                 like.like_image.remove(user.id)
+                like.op=False
                 like.save()
                 like_serializer= LikeImageSerializer(like)
                 return Response({'Image':like_serializer.data,'Usuario':user_serializer.data,'mensaje':'el usuario quito el like'}, status=status.HTTP_302_FOUND)

@@ -31,13 +31,14 @@ class ImagenSerializer(serializers.ModelSerializer):
 class LikeImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = LikeImage
-        fields = ('id','cant_likes')
+        fields = ('id','cant_likes','op')
 
     def to_representation(self,instance):
       
         return {
             'id_like': instance.id,
             'cant_likes_image': instance.cant_likes,
+            'like_user': instance.op
         
         }
 
