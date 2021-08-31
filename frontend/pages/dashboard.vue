@@ -1,23 +1,10 @@
 <template>
   <div class="container">
-    <Card v-for="image in images" :key="image.id">
-      <template v-slot:header>
-          <font-awesome-icon 
-            icon="heart"
-            color="#607d8b"
-          />
-        <h3>{{image.title}}</h3>
-        {{image.id}}
-        <button @click="deleteImage(image.id)">
-          <font-awesome-icon 
-            icon="trash-alt"
-            color="#607d8b"
-          />
-        </button>
-      </template>
-        <img class="image" :src="`http://localhost:8000${image.image}`">
-        <p>{{image.description}}</p>
-    </Card>
+    <ImagePost 
+      v-for="image in images" 
+      :key="image.id" 
+      :image="image"
+    />
   </div>
 </template>
 <script>

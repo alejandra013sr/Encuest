@@ -6,6 +6,7 @@
 			:placeholder="placeholder"
 			:value="value"
 			@input="$emit('input', $event.target.value)"
+			:disabled="disabled"
 		>
 	</div>
 </template>
@@ -15,7 +16,8 @@ export default {
 	props: {
 		name: String,
 		placeholder: String,
-		value: String
+		value: String,
+		disabled: Boolean
 	}
 }
 

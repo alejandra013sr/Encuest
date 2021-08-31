@@ -6,15 +6,14 @@
 				<span>para continuar</span>
 			</div>
 			<form class="login__form" @submit.prevent>
-				<InputText v-model="name" name="name" placeholder="Nombre" />
-				<InputEmail v-model="email" name="email" placeholder="Correo" />
-				<InputPassword v-model="pass" name="password" placeholder="Contraseña" />
+				<InputText v-model="creds.name" name="name" placeholder="Nombre" />
+				<InputEmail v-model="creds.email" name="email" placeholder="Correo" />
+				<InputPassword v-model="creds.pass" name="password" placeholder="Contraseña" />
 				<Button class="button--backgroundGradient" @click="register">Resgistrarme</Button>
 			</form>	
 			<div class="login__links">
 				<Button class="button--borderGradient">Google</Button>
 				<Button class="button--borderGradient">Facebook</Button>
-				<div>{{email}}</div>
 			</div>
 		</main>
 		<footer class="login__footer">
@@ -27,36 +26,66 @@
 	</div>
 </template>
 <script>
+
+import authMixin from '~/mixins/auth.mixin'
+import { STATUS_INITIAL, STATUS_LOADING } from '~/utils/statusConstants' 
 	
 export default {
 	layout: 'home',
 	name: 'Register',
+	mixins: [authMixin],
 	data(){
 		return {
-			name: '',
-			email: '',
-			pass: ''
+			creds: {
+				name: '',
+				email: '',
+				pass: ''
+			}
 		}
 	},
 	methods: {
 		async register(){
-			try {
-				const res = await this.$axios.$post('http://localhost:8000/profile/users/', {
-					"name": this.name,
-					"email": this.email,
-					"password": this.pass
+
+			const validation = this.validateForm();
+
+			if(!validation){
+				this.$notify({
+					type: 'warnning',
+					// title: 'Error',
+					text: 'Debes llenar todos los campos.'
 				});
-				console.log(res);
-				const resauth = await this.$auth.loginWith('local', {
+				this.currentStatus = STATUS_INITIAL;
+				return;
+			}
+
+			try {
+				await this.$axios.$post('http://localhost:8000/profile/users/', {
+					"name": this.creds.name,
+					"email": this.creds.email,
+					"password": this.creds.pass
+				});
+				
+				await this.$auth.loginWith('local', {
 					data: {
-						email: this.email,
-						password: this.pass
+						email: this.creds.email,
+						password: this.creds.pass
 					}
 				});
+
 				this.$router.push('/dashboard');
-				console.log(resauth);
-			} catch (error) {
-				console.log(error);
+
+			} catch (e) {
+
+				this.currentStatus = STATUS_INITIAL;
+
+				const error = e.toJSON();
+
+				this.$notify({
+					type: 'error',
+					title: 'Error',
+					text: error.message
+				});
+				
 			}
 		}
 	}

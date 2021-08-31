@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard">
+    <notifications position="bottom right"/>
     <header>
       <Navbar />
     </header>

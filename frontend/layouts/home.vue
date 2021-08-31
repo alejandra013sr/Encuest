@@ -1,5 +1,6 @@
 <template>
 	<div class="home" :class="{ 'principal' : !authMode }">
+    <notifications position="top center"/>
 		<header class="home__header">
         <Logo :class="{ 'logo--auth' : authMode }" />
     </header>

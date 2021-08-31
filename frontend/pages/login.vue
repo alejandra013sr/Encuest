@@ -6,9 +6,23 @@
 				<span>para continuar</span>
 			</div>
 			<form class="login__form" @submit.prevent>
-				<InputEmail v-model="email" name="email" placeholder="Correo" />
-				<InputPassword v-model="pass" name="password" placeholder="Contraseña" />
-				<Button class="button--backgroundGradient" @click="login">Log in</Button>
+				<InputEmail 
+					v-model="creds.email" 
+					name="email" 
+					placeholder="Correo" 
+					:disabled="isLoading"
+				/>
+				<InputPassword 
+					v-model="creds.pass" 
+					name="password" 
+					placeholder="Contraseña" 
+					:disabled="isLoading"
+				/>
+				<Button 
+					class="button--backgroundGradient" 
+					@click="login"
+					:disabled="isLoading"
+				>Log in</Button>
 			</form>	
 			<div class="login__links">
 				<Button class="button--borderGradient">Google</Button>
@@ -25,27 +39,62 @@
 	</div>
 </template>
 <script>
-	
+
+import authMixin from '~/mixins/auth.mixin'
+import { STATUS_INITIAL, STATUS_LOADING } from '~/utils/statusConstants'
+
 export default {
 	name: 'Login',
 	transition: 'auth',
 	layout: 'home',
+	mixins: [authMixin],
 	data(){
 		return {
-			email: '',
-			pass: ''
+			creds: {
+				email: '',
+				pass: ''
+			}
 		}
 	},
 	methods: {
 		async login(){
-			const resauth = await this.$auth.loginWith('local', {
-				data: {
-					email: this.email,
-					password: this.pass
-				}
-			});
-			console.log(resauth);
-			this.$router.push('/dashboard');
+			const validation = this.validateForm();
+			
+			if(!validation){
+
+				this.$notify({
+					type: 'warnning',
+					// title: 'Error',
+					text: 'Debes llenar todos los campos.'
+				});
+
+				this.currentStatus = STATUS_INITIAL;
+				return;
+			}
+
+			try {
+
+				await this.$auth.loginWith('local', {
+					data: {
+						email: this.creds.email,
+						password: this.creds.pass
+					}
+				});
+
+				this.$router.push('/dashboard');
+
+			} catch (e){
+
+				this.currentStatus = STATUS_INITIAL;
+
+				const error = e.toJSON();
+				this.$notify({
+					type: 'error',
+					title: 'Error',
+					text: error.message
+
+				});
+			}
 		}
 	}
 }
