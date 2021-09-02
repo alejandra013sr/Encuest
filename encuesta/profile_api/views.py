@@ -1,5 +1,6 @@
 from django.contrib.sessions.models import Session #Esta clase maneja las sesiones
 from datetime import datetime
+from django.http.response import HttpResponse
 
 import rest_framework
 from rest_framework.response import Response
@@ -68,9 +69,9 @@ class Login(ObtainAuthToken):
                             status=status.HTTP_400_BAD_REQUEST)
             
 
-        return Response({'message':'Hola desde response'}, status = status.HTTP_200_OK)
+        
 
-    def get(self,request, *args, **kwargs):
+    def get(self,request, *args, **kwargs):#Conseguir un usuario
         try: 
             token = request.headers.get('Authorization')
             token=token.strip('Bearer ')
@@ -83,6 +84,8 @@ class Login(ObtainAuthToken):
                 
 
                 return Response({"user":user.data},status=status.HTTP_200_OK)
+            else:
+                return Response({"error":"token no existe"},status=status.HTTP_400_BAD_REQUEST)
         except:
             return Response({"error":"token no recibido"},status=status.HTTP_400_BAD_REQUEST)
                 
