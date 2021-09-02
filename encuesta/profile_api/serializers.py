@@ -45,9 +45,9 @@ class ListUserSerializer(serializers.ModelSerializer):
 
     def to_representation(self,instance):
         return{
-            'id': instance.id,
-            'name': instance.name,
-            'email': instance.email,
+            'id': instance['id'],
+            'name': instance['name'],
+            'email': instance['email'],
         }
 
 class loginSerializer(serializers.Serializer):
