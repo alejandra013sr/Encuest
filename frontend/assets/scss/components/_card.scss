@@ -1,4 +1,5 @@
 .card {
+  position: relative;
   width: 100%;
   // min-height: 400px;
   display: flex;
@@ -6,6 +7,7 @@
   background: #ffffff;
   border-radius: 15px;
   box-shadow: 0px 3px 10px 1px #525151;
+  overflow: hidden;
 
   &__wrapper {
     padding: 10px 5px;

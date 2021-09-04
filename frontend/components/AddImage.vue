@@ -13,6 +13,7 @@
     >
     <span v-if="isSuccess">Imagen guardada correctamente</span>
     <span v-if="isFailed">Error al guardar la imagen</span>
+    <Loader v-if="isSaving" />
   </div>
 </template>
 <script>
@@ -88,6 +89,7 @@ export default {
     },
     async save(file){
       console.log(this.$axios);
+      this.currentStatus = STATUS_SAVING;
       try {
         const res = await this.$axios.post('/imagenes/image/', {
           title: 'Titulo',

@@ -1,5 +1,6 @@
 <template>
   <div class="navbar">
+    <h1>App</h1>
     <div v-if="isAuthenticated">
       <button @click="logout">Logout</button>
     </div>

@@ -34,6 +34,7 @@ export default {
 	layout: 'home',
 	name: 'Register',
 	mixins: [authMixin],
+	// middleware: 'guest',
 	data(){
 		return {
 			creds: {
@@ -85,7 +86,7 @@ export default {
 					title: 'Error',
 					text: error.message
 				});
-				
+
 			}
 		}
 	}

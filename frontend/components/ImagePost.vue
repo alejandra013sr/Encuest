@@ -4,6 +4,7 @@
         <font-awesome-icon 
           icon="heart"
           color="#607d8b"
+          @click="like"
         />
       <h3>{{image.title}}</h3>
       {{image.id}}
@@ -28,10 +29,13 @@ export default {
       required: true
     }
   },
-  async created(){
-    const res = await this.$axios.$put('/imagenes/image/detail/', {
-      id: this.image.id
-    });
+  methods: {
+    async like(){
+      const res = await this.$axios.$put('/imagenes/image/detail/', {
+        id: this.image.id
+      });
+      console.log(res);
+    }
   }
 }
 

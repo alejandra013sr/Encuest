@@ -2,6 +2,7 @@ const STATUS_INITIAL = 0;
 const STATUS_LOADING = 1;
 
 export default {
+  middleware: 'guest',
   data(){
     return {
       currentStatus: 0

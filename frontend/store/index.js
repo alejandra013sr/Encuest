@@ -30,9 +30,12 @@ export const getters = {
 
 export const actions = {
   async images({ commit }){
-    const res = await this.$axios.get('/imagenes/image/user/');
-    console.log(res);
-    commit('addImages', res.data.imagenes);
+    try {
+      const res = await this.$axios.get('/imagenes/image/user/');
+      commit('addImages', res.data.imagenes);
+    } catch (e) {
+      console.log(e);
+    }
   },
   async deleteImage({ commit, dispatch, state }, id){
     const res = await this.$axios.$delete('/imagenes/image/user/', { data: { id } });

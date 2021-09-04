@@ -15,7 +15,8 @@
 <script>
   
 export default {
-  name: 'DashboardLayout'
+  name: 'DashboardLayout',
+  middleware: 'auth'
 }
 
 </script>

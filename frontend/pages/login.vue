@@ -59,7 +59,7 @@ export default {
 	methods: {
 		async login(){
 			const validation = this.validateForm();
-			
+
 			if(!validation){
 
 				this.$notify({

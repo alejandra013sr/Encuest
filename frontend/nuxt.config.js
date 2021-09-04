@@ -47,7 +47,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl: 'http://localhost:8000'
+    baseUrl: 'http://backend:8000'
   },
 
   auth: {
@@ -80,5 +80,17 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: 'http://localhost:8000'
+    }
+  },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: 'http://backend:8000'
+    }
   }
 }

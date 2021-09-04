@@ -7,6 +7,7 @@
         <span>APP</span>
       </div>
     </div>
+    {{ isAuthenticated }}
     <template v-if="!isAuthenticated">
       <NuxtLink to="/login" class="home__option">Login</NuxtLink>
       <NuxtLink to="/register" class="home__option">Register</NuxtLink>
