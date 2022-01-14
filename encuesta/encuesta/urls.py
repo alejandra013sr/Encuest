@@ -26,7 +26,8 @@ urlpatterns = [
    path('profile/',include('profile_api.urls')),
    path('login/',Login.as_view(),name="Login"),
    path('logout/',Logout.as_view(),name="Logout"),
-   path('imagenes/',include('imagenes.urls'))
+   path('imagenes/',include('imagenes.urls')),
+   path('chat/',include('chat.urls'))
   
 ]
 
